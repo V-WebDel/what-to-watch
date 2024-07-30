@@ -1409,3 +1409,26 @@ main {
   top: 50%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%); }
+
+
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.not-found__title {
+  font-weight: 700;
+  font-size: 48px;
+}
+
+.not-found__link {
+  font-weight: 700;
+  font-size: 32px;
+  text-decoration: none;
+}
+
+.not-found__link:hover {
+  text-decoration: underline;
+}
