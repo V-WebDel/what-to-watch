@@ -1,21 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-
-const CARDS_COUNT = 20;
+import {films} from './mocks/films';
 
 const DATA_FILM = {
   name: 'The Grand Budapest Hotel',
+  poster: 'img/the-grand-budapest-hotel-poster.jpg',
+  background: 'img/bg-the-grand-budapest-hotel.jpg',
   genre: 'Drama',
   year: 2014,
+  runTime: 100,
 };
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
+
 root.render(
   <React.StrictMode>
-    <App cardsCount={CARDS_COUNT} dataFilm={DATA_FILM} />
+    <App dataFilm={DATA_FILM} films={films} />
   </React.StrictMode>,
 );

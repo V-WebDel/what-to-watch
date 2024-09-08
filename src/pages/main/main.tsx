@@ -1,23 +1,28 @@
-import Card from '../../components/card/card';
-import FilmCard from '../../components/filmCard/filmCard';
+import FilmList from '../../components/filmList/filmList';
+import FilmTop from '../../components/filmTop/filmTop';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
 
 import { Link } from 'react-router-dom';
 
+import { Films } from '../../types/films';
+
 type MainProps = {
-  cardsCount: number;
   name: string;
+  poster: string;
+  background: string;
   genre: string;
   year: number;
+  films: Films;
 }
 
-function Main({cardsCount, name, genre, year }: MainProps): JSX.Element {
+function Main({ name, poster, background, genre, year, films }: MainProps): JSX.Element {
+
   return (
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="./img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={background} alt="The Grand Budapest Hotel" />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -38,7 +43,8 @@ function Main({cardsCount, name, genre, year }: MainProps): JSX.Element {
           </ul>
         </header>
 
-        <FilmCard name={name} genre={genre} year={year} />
+        <FilmTop name={name} poster={poster} genre={genre} year={year}/>
+
       </section>
 
       <div className="page-content">
@@ -78,9 +84,7 @@ function Main({cardsCount, name, genre, year }: MainProps): JSX.Element {
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            {Array.from({length: cardsCount}, ( _, index) => <Card key={index}/>)}
-          </div>
+          <FilmList films={films} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
