@@ -7,6 +7,7 @@ export type Review = {
     id: number;
     name: string;
   };
+  filmId: number;
 };
 
 export type Reviews = Review[];

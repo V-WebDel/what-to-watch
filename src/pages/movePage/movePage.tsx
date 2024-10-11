@@ -1,7 +1,8 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import FilmList from '../../components/filmList/filmList';
+import RelatedList from '../../components/relatedList/relatedList';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
+import Tabs from '../../components/tabs/tabs';
 import {AppRoute} from '../../const';
 
 import { Films } from '../../types/films';
@@ -78,35 +79,7 @@ function MovePage({ films }:FilmCardProps): JSX.Element {
             </div>
 
             <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a className="film-nav__link" href='/'>Overview</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a className="film-nav__link" href='/'>Details</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a className="film-nav__link" href='/'>Reviews</a>
-                  </li>
-                </ul>
-              </nav>
-
-              <div className="film-rating">
-                <div className="film-rating__score">{film.rating}</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">{film.scores} ratings</span>
-                </p>
-              </div>
-
-              <div className="film-card__text">
-                {film.description}
-
-                <p className="film-card__director"><strong>Director: {film.releaseDate}</strong></p>
-
-                <p className="film-card__starring"><strong>Starring: {film.starring.join(', ')}</strong></p>
-              </div>
+              <Tabs film={film} />
             </div>
           </div>
         </div>
@@ -116,7 +89,7 @@ function MovePage({ films }:FilmCardProps): JSX.Element {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <FilmList films={films} />
+          <RelatedList films={films} />
         </section>
 
         <Footer />

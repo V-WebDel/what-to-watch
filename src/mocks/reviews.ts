@@ -10,6 +10,7 @@ export const reviews: Reviews = [
       id: 345,
       name: 'John Doe',
     },
+    filmId: 1,
   },
   {
     comment: 'Snatch is a rollicking crime caper that mixes dark humor with an intricate plot and unforgettable characters. Guy Ritchie\'s style is on full display here.',
@@ -20,6 +21,7 @@ export const reviews: Reviews = [
       id: 456,
       name: 'Jane Smith',
     },
+    filmId: 1,
   },
   {
     comment: 'The Darjeeling Limited is a whimsical journey through India with Wes Anderson\'s signature style. It\'s a film about family, self-discovery, and the beauty of imperfection.',
@@ -30,6 +32,7 @@ export const reviews: Reviews = [
       id: 567,
       name: 'Robert Brown',
     },
+    filmId: 2,
   },
   {
     comment: 'Spielberg\'s War of the Worlds is a thrilling, relentless ride that captures the fear and chaos of an alien invasion. Cruise delivers a compelling performance as a father fighting to protect his family.',
@@ -40,6 +43,7 @@ export const reviews: Reviews = [
       id: 678,
       name: 'Emily White',
     },
+    filmId: 3,
   },
   {
     comment: 'Macbeth is a visually stunning interpretation of Shakespeare\'s tragedy. The atmosphere is heavy and intense, with Fassbender and Cotillard delivering truly haunting performances.',
@@ -50,6 +54,7 @@ export const reviews: Reviews = [
       id: 789,
       name: 'William Green',
     },
+    filmId: 4,
   },
   {
     comment: 'Snatch is an energetic and stylish crime film that never lets up. The fast pace, witty dialogue, and memorable characters make it a modern classic in the genre.',
@@ -60,6 +65,7 @@ export const reviews: Reviews = [
       id: 890,
       name: 'Sarah Black',
     },
+    filmId: 5,
   },
   {
     comment: 'The Darjeeling Limited is a vibrant, emotional journey through brotherhood and forgiveness. Anderson\'s distinct style shines through in every frame, making it a must-watch.',
@@ -70,6 +76,7 @@ export const reviews: Reviews = [
       id: 901,
       name: 'Tom Clark',
     },
+    filmId: 8,
   },
   {
     comment: 'War of the Worlds is a pulse-pounding spectacle that delivers both suspense and a deeply human story. Spielberg effectively balances the large-scale destruction with intimate moments of fear and hope.',
@@ -80,5 +87,6 @@ export const reviews: Reviews = [
       id: 912,
       name: 'Anna Lee',
     },
+    filmId: 8,
   }
 ];

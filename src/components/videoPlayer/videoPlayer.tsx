@@ -1,4 +1,4 @@
-import {useEffect, useRef} from 'react';
+import {useEffect, useState, useRef} from 'react';
 
 type VideoPlayerProps = {
   poster: string;
@@ -8,6 +8,7 @@ type VideoPlayerProps = {
 
 function VideoPlayer({poster, src, isActive}: VideoPlayerProps): JSX.Element {
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const videoElement = videoRef.current;
@@ -16,13 +17,15 @@ function VideoPlayer({poster, src, isActive}: VideoPlayerProps): JSX.Element {
       return;
     }
 
-    if (isActive) {
+    videoElement.addEventListener('loadeddata', () => setIsLoading(false));
+
+    if (isActive && !(isLoading)) {
       videoElement.play();
     } else {
       videoElement.pause();
       videoElement.load();
     }
-  }, [isActive]);
+  }, [isActive, isLoading]);
 
   return (
     <video
