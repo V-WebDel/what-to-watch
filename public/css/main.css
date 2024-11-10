@@ -852,7 +852,9 @@ main {
   color: #EEE5B5;
   text-decoration: none;
   position: relative;
-  padding-bottom: 19px; }
+  padding-bottom: 19px;
+  background: none;
+  border: none; }
   .film-nav__link::after {
     content: '';
     position: absolute;
@@ -1295,7 +1297,7 @@ main {
     z-index: 3;
     -webkit-transform: scale(1.2);
             transform: scale(1.2); }
-  .small-film-card img {
+  .small-film-card img, .small-film-card video {
     vertical-align: top;
     width: 100%;
     height: 100%;

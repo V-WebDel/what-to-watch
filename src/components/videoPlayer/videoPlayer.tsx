@@ -31,7 +31,6 @@ function VideoPlayer({poster, src, isActive}: VideoPlayerProps): JSX.Element {
     <video
       poster={poster}
       ref={videoRef}
-      width="280"
       muted
     >
       <source src={src} type="video/mp4" />
