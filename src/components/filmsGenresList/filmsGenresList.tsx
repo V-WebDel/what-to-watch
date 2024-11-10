@@ -2,16 +2,28 @@ import {Link} from 'react-router-dom';
 import {changeGenres, getFilmsByGenres} from '../../store/action';
 import {useAppDispatch, useAppSelector} from '../../hooks/index';
 import FilmList from '../filmList/filmList';
-
+import ShowMoreButton from '../showMoreButton/showMoreButton';
+import { useEffect, useState } from 'react';
 
 function FilmsGenresList(): JSX.Element {
+  const dispatch = useAppDispatch();
+
   const films = useAppSelector((state) => state.filmsList);
   const filmsFilter = useAppSelector((state) => state.filmsFilter);
-  const dispatch = useAppDispatch();
   const genres = ['All genres'];
   const genreCurrent = useAppSelector((state) => state.genre);
 
+  const [displayCount, setDisplayCount] = useState(8);
+
   films.forEach((film) => (!(genres.includes(film.genre))) ? genres.push(film.genre) : genres);
+
+  useEffect(() => {
+    setDisplayCount(8);
+  }, [genreCurrent]);
+
+  const handleShowMore = () => {
+    setDisplayCount((prevCount) => prevCount + 8);
+  };
 
   return (
     <section className="catalog">
@@ -36,11 +48,11 @@ function FilmsGenresList(): JSX.Element {
         }
       </ul>
 
-      <FilmList films={filmsFilter} />
+      <FilmList films={filmsFilter.slice(0, displayCount)} />
 
-      <div className="catalog__more">
-        <button className="catalog__button" type="button">Show more</button>
-      </div>
+      {displayCount < filmsFilter.length && (
+        <ShowMoreButton onClick={handleShowMore} />
+      )}
     </section>
   );
 }
