@@ -10,7 +10,7 @@ type FilmCardProps = Film & {
   onMouseLeave: () => void;
 };
 
-function FilmCard({id, name, poster, previewVideoLink, isActive, onMouseEnter, onMouseLeave}:FilmCardProps): JSX.Element {
+function FilmCard({id, name, posterImage, previewVideoLink, isActive, onMouseEnter, onMouseLeave}:FilmCardProps): JSX.Element {
   const hoverTimerRef = useRef<NodeJS.Timeout | null>(null);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -36,7 +36,7 @@ function FilmCard({id, name, poster, previewVideoLink, isActive, onMouseEnter, o
     >
       <div className="small-film-card__image">
         <VideoPlayer
-          poster={poster}
+          poster={posterImage}
           src={previewVideoLink}
           isActive={isHovered}
         />

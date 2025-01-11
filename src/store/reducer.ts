@@ -1,11 +1,22 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {changeGenres, getFilmsByGenres} from './action';
-import {films} from './../mocks/films';
+import {fetchFilms} from './api-action';
 
-const initialState = {
+import { Film } from '../types/films';
+
+
+type State = {
+  genre: string,
+  filmsList: Film[],
+  filmsFilter: Film[],
+  isFilmsLoading: boolean,
+}
+
+const initialState: State = {
   genre: 'All genres',
-  filmsList: films,
-  filmsFilter: films,
+  filmsList: [],
+  filmsFilter: [],
+  isFilmsLoading: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -16,6 +27,16 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(getFilmsByGenres,(state, action) => {
       state.filmsFilter = state.filmsList.filter((filmItem) =>
         (action.payload !== 'All genres') ? filmItem.genre === action.payload : true );
+    })
+    .addCase(fetchFilms.pending, (state, action) => {
+      state.isFilmsLoading = true;
+    })
+    .addCase(fetchFilms.fulfilled, (state, action) => {
+      state.filmsList = action.payload;
+      state.isFilmsLoading = false;
+    })
+    .addCase(fetchFilms.rejected, (state, action) => {
+      state.isFilmsLoading = false;
     });
 });
 

@@ -3,9 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 import { Provider } from 'react-redux';
 
-import {films} from './mocks/films';
-
-import {store} from './store/index';
+import store from './store/index';
 
 const DATA_FILM = {
   name: 'The Grand Budapest Hotel',
@@ -24,7 +22,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App dataFilm={DATA_FILM} films={films} />
+      <App dataFilm={DATA_FILM} films={[]} />
     </Provider>
   </React.StrictMode>
 );

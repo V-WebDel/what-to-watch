@@ -1,9 +1,10 @@
 import {Link} from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import {changeGenres, getFilmsByGenres} from '../../store/action';
 import {useAppDispatch, useAppSelector} from '../../hooks/index';
+import { fetchFilms } from '../../store/api-action';
 import FilmList from '../filmList/filmList';
 import ShowMoreButton from '../showMoreButton/showMoreButton';
-import { useEffect, useState } from 'react';
 
 function FilmsGenresList(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -17,9 +18,12 @@ function FilmsGenresList(): JSX.Element {
 
   films.forEach((film) => (!(genres.includes(film.genre))) ? genres.push(film.genre) : genres);
 
+
   useEffect(() => {
-    setDisplayCount(8);
-  }, [genreCurrent]);
+    if (films.length > 0) {
+      dispatch(getFilmsByGenres('All genres'));
+    }
+  }, [dispatch, films]);
 
   const handleShowMore = () => {
     setDisplayCount((prevCount) => prevCount + 8);
@@ -47,6 +51,7 @@ function FilmsGenresList(): JSX.Element {
           })
         }
       </ul>
+
 
       <FilmList films={filmsFilter.slice(0, displayCount)} />
 
