@@ -1,15 +1,18 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {changeGenres, getFilmsByGenres} from './action';
-import {fetchFilms} from './api-action';
+import {fetchFilms, fetchUserStatus, loginUser} from './api-action';
 
 import { Film } from '../types/films';
-
+import { User } from '../types/user-data';
+import { AuthorizationStatus } from '../const';
 
 type State = {
   genre: string,
   filmsList: Film[],
   filmsFilter: Film[],
   isFilmsLoading: boolean,
+  authorizationStatus: AuthorizationStatus,
+  user: User['email'],
 }
 
 const initialState: State = {
@@ -17,6 +20,8 @@ const initialState: State = {
   filmsList: [],
   filmsFilter: [],
   isFilmsLoading: false,
+  authorizationStatus: AuthorizationStatus.NoAuth,
+  user: '',
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -37,6 +42,17 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(fetchFilms.rejected, (state, action) => {
       state.isFilmsLoading = false;
+    })
+    .addCase(fetchUserStatus.fulfilled, (state, action) => {
+      state.user = action.payload.email;
+      state.authorizationStatus = AuthorizationStatus.Auth;
+    })
+    .addCase(fetchUserStatus.rejected, (state) => {
+      state.authorizationStatus = AuthorizationStatus.NoAuth;
+    })
+    .addCase(loginUser.fulfilled, (state, action) => {
+      state.user = action.payload;
+      state.authorizationStatus = AuthorizationStatus.Auth;
     });
 });
 

@@ -1,9 +1,7 @@
 import FilmsGenresList from '../../components/filmsGenresList/filmsGenresList';
 import FilmTop from '../../components/filmTop/filmTop';
+import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
-import Logo from '../../components/logo/logo';
-
-import { Link } from 'react-router-dom';
 
 import { Films } from '../../types/films';
 
@@ -27,21 +25,7 @@ function Main({ name, poster, background, genre, year, films }: MainProps): JSX.
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <header className="page-header film-card__head">
-
-          <Logo/>
-
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <Link className="user-block__link" to="/logIn">Sign out</Link>
-            </li>
-          </ul>
-        </header>
+        <Header/>
 
         <FilmTop name={name} poster={poster} genre={genre} year={year}/>
 

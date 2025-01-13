@@ -7,8 +7,9 @@ import LogIn from '../../pages/logIn/logIn';
 import NotFound from '../../pages/notFound/notFound';
 import PrivateRoute from '../privateRoute/privateRoute';
 
-import {AppRoute, AuthorizationStatus} from '../../const';
-import {Route, BrowserRouter, Routes} from 'react-router-dom';
+import {AppRoute} from '../../const';
+import { Route, BrowserRouter, Routes, unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
+import history from '../../history';
 
 import { Films } from '../../types/films';
 
@@ -26,16 +27,14 @@ type AppProps = {
 
 function App({dataFilm, films}: AppProps): JSX.Element {
   return (
-    <BrowserRouter>
+    <HistoryRouter history={history}>
       <Routes>
         <Route index element={<Main name={dataFilm.name} poster={dataFilm.poster} background={dataFilm.background} genre={dataFilm.genre} year={dataFilm.year} films={films} />}/>
         <Route path={AppRoute.Login} element={<LogIn />}/>
         <Route path={AppRoute.MyList}
           element={
-            <PrivateRoute
-              authorizationStatus={AuthorizationStatus.NoAuth}
-            >
-              <MyList films={films} />
+            <PrivateRoute>
+              <MyList films={[]} />
             </PrivateRoute>
           }
         />
@@ -44,7 +43,7 @@ function App({dataFilm, films}: AppProps): JSX.Element {
         <Route path={AppRoute.Player} element={<Player name={dataFilm.name} poster={dataFilm.poster} runTime={dataFilm.runTime} />}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 

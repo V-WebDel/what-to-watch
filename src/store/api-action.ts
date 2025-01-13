@@ -2,10 +2,11 @@ import type { History } from 'history';
 import type { AxiosInstance, AxiosError } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { AppDispatch, State } from '../types/state.js';
-
 import { Film } from '../types/films.js';
+import { User, UserAuth } from '../types/user-data.js';
 import { ApiRoute, AppRoute, HttpCode } from '../const';
+import { saveToken } from '../token';
+
 
 type Extra = {
   api: AxiosInstance;
@@ -16,19 +17,17 @@ export const Action = {
   FETCH_FILMS: 'films/fetchFilms',
   FETCH_FILM: 'film/fetchFilm',
   FETCH_FAVORITE_FILMS: 'films/fetch-favorite',
+  LOGIN_USER: 'user/login',
+  FETCH_USER_STATUS: 'user/fetch-status'
 };
 
-export const fetchFilms = createAsyncThunk<Film[], undefined, { extra: AxiosInstance }>(
+export const fetchFilms = createAsyncThunk<Film[], undefined, { extra: Extra }>(
   Action.FETCH_FILMS,
-  async (_, { extra: api }) => {
-    // const { api } = extra;
-    try {
-      const { data } = await api.get<Film[]>(ApiRoute.Films);
-      return data;
-    } catch (error) {
-      console.error('Ошибка при загрузке фильмов:', error);
-      throw error;
-    }
+  async (_, { extra }) => {
+    const { api } = extra;
+    const { data } = await api.get<Film[]>(ApiRoute.Films);
+
+    return data;
   });
 
 export const fetchFavoriteFilms = createAsyncThunk<Film[], undefined, { extra: Extra }>(
@@ -60,3 +59,22 @@ export const fetchFilm = createAsyncThunk<Film, Film['id'], { extra: Extra }>(
     }
   });
 
+export const fetchUserStatus = createAsyncThunk<User, undefined,  { extra: Extra }>(
+  Action.FETCH_USER_STATUS,
+  async (_, { extra }) => {
+    const { api } = extra;
+    const { data } = await api.get<User>(ApiRoute.Login);
+
+    return data;
+  });
+
+export const loginUser = createAsyncThunk<UserAuth['email'], UserAuth, { extra: Extra }>(
+  Action.LOGIN_USER,
+  async ({ email, password }, { extra }) => {
+    const { api, history } = extra;
+    const { data } = await api.post<User>(ApiRoute.Login, { email, password });
+    const { token } = data;
+    saveToken(token);
+    history.back();
+    return email;
+  });

@@ -1,7 +1,25 @@
+import type { FormEvent } from 'react';
+import type { UserAuth } from '../../types/user-data';
+
+import { useAppDispatch } from '../../hooks';
+import { loginUser } from '../../store/api-action';
+
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
 
 function LogIn(): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+
+    const formData = new FormData(form) as Iterable<[UserAuth]>;
+    const data = Object.fromEntries(formData);
+
+    dispatch(loginUser(data));
+  };
+
   return (
     <div className="user-page">
 
@@ -13,7 +31,7 @@ function LogIn(): JSX.Element {
       </header>
 
       <div className="sign-in user-page__content">
-        <form action="#" className="sign-in__form">
+        <form className="sign-in__form" action="#" method="post" onSubmit={handleFormSubmit}>
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" />
