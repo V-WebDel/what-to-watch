@@ -1,4 +1,4 @@
-import axios, {AxiosInstance, AxiosRequestConfig} from 'axios';
+import axios, {AxiosInstance, AxiosRequestConfig, AxiosError} from 'axios';
 import { getToken } from './token';
 
 const BACKEND_URL = 'https://10.react.htmlacademy.pro/wtw';

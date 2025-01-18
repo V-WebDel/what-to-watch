@@ -2,6 +2,7 @@ import {configureStore} from '@reduxjs/toolkit';
 import {reducer} from './reducer';
 import { createAPI } from '../api';
 import { fetchFilms, fetchUserStatus } from './api-action';
+import history from '../history';
 
 const api = createAPI();
 const store = configureStore({
