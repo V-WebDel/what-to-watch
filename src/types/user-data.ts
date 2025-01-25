@@ -5,10 +5,11 @@ export type UserData = {
 };
 
 export type User = {
-  avatarUrl: string;
-  email: string;
   id: number;
+  email: string;
   name: string;
+  isPro: boolean;
+  avatarUrl: string;
   token: string;
 };
 

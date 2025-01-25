@@ -3,7 +3,7 @@ import type { AxiosInstance, AxiosError } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { Film } from '../types/films.js';
-import { User, UserAuth, UserData } from '../types/user-data.js';
+import { User, UserAuth } from '../types/user-data.js';
 import { ApiRoute, AppRoute, HttpCode } from '../const';
 import { saveToken } from '../token';
 
@@ -72,7 +72,7 @@ export const loginUser = createAsyncThunk<UserAuth['email'], UserAuth, { extra: 
   Action.LOGIN_USER,
   async ({ email, password }, { extra }) => {
     const { api, history } = extra;
-    const { data } = await api.post<UserData>(ApiRoute.Login, { email, password });
+    const { data } = await api.post<User>(ApiRoute.Login, { email, password });
     const { token } = data;
 
     saveToken(token);
